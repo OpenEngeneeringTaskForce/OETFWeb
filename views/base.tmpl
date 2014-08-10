@@ -20,10 +20,10 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="#">OETF</a>
+                <a class="navbar-brand" href="/">OETF</a>
             </div>
             <div class="collapse navbar-collapse">
-                <form class="navbar-form navbar-left" role="search">
+                <form class="navbar-form navbar-right" role="search">
                     <div class="input-group">
                         <input type="text" class="form-control" placeholder="Search">
                         <div class="input-group-btn">
@@ -31,12 +31,6 @@
                         </div>
                     </div>
                 </form>
-                <ul class="nav navbar-nav navbar-right">
-                    <li class="active"><a href="#">Home</a></li>
-                    <li><a href="#about">About</a></li>
-                    <li><a href="#submit">Submit</a></li>
-                    <li><a href="#login">Login</a></li>
-                </ul>
             </div> <!-- nav-collapse -->
         </div> <!-- container -->
     </div> <!-- navbar -->
@@ -51,25 +45,36 @@
                 </p>
             <div class="jumbotron">
                 <h1>Say Hello to OETF!</h1>
-                <p>This is the upcomming page of OETF - the Open Engineers Task Force!</p>
+                <p>This is the upcoming page of OETF - the Open Engineers Task Force!</p>
             </div>
             <div class="row">
                 <div class="col-6 col-sm-6 col-lg-4">
                     <h2>About OETF</h2>
                     <p>OETF is just like IETF, but for OpenComputers.</p>
-                    <p><a class="btn btn-default" href="?r=about" role="button">View details &raquo;</a></p>
+                    <p><a class="btn btn-default" href="?r=default/about" role="button">View details &raquo;</a></p>
                 </div><!--/span-->
             </div><!--/row-->
         </div><!--/span-->
 
         <div class="col-xs-6 col-sm-3 sidebar-offcanvas" id="sidebar" role="navigation">
-            <div class="list-group">
-                <a href="#" class="list-group-item active">Main Page</a>
-                <a href="#" class="list-group-item">Placeholders</a>
-                <a href="#" class="list-group-item">Placeholders</a>
-                <a href="#" class="list-group-item">Placeholders</a>
-            </div>
-        </div><!--/span-->
+            <ul class="nav nav-pills nav-stacked">
+                <li class="active"><a href="/">Main Page</a></li>
+                <li><a href="?r=default/about">About</a></li>
+                <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                    List Submits <span class="caret"></span>
+                </a>
+                    <ul class="dropdown-menu" role="menu">
+                        <li role="navigation"><a role="menuitem" tabindex="-1" href="?r=list/alphabetic">Ordered by Alphabet</a></li>
+                        <li role="navigation"><a role="menuitem" tabindex="-1" href="?r=list/tag">Ordered by Tag</a></li>
+                        <li role="navigation"><a role="menuitem" tabindex="-1" href="?r=list/date">Ordered by Date</a></li>
+                    </ul>
+                </li>
+                <li><a href="?r=submit/submit">Submit New</a></li>
+                <li><a href="?r=user/login">Login</a></li>
+            </ul>
+        </div>
+        
+        
       </div><!--/row-->
 
       <hr>
