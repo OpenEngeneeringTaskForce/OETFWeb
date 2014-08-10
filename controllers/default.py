@@ -29,7 +29,7 @@ class Default():
             template_var = model.default()
             # Get the view necessary
             env = Environment()
-            env.loader = FileSystemLoader('/var/www/oetfdev/views/')
+            env.loader = FileSystemLoader('views/')
             template = env.get_template('default.tmpl')
             return str(template.render(template_var))
         else:

@@ -39,7 +39,7 @@ def dynamify(request_dict):
         
         else:
             env = Environment()
-            env.loader = FileSystemLoader('/var/www/oetfdev/views/')
+            env.loader = FileSystemLoader(['views/'])
             template = env.get_template('404.tmpl')
             return Response("404 PAGE NOT FOUND", template.render(request_dict))
     
