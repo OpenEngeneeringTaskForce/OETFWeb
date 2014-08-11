@@ -1,3 +1,7 @@
 # Editor project files#
 #######################
 *.komodoproject
+
+# Config files may contain sensitive data #
+###########################################
+*.conf

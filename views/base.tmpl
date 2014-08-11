@@ -14,7 +14,7 @@
     <div class="navbar navbar-fixed-top navbar-inverse" role="navigation">
         <div class="container">
             <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <button type="button" class="navbar-toggle" data-toggle="offcanvas">
                     <span class="sr-only">Toggle NavBar</span>
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
@@ -22,74 +22,59 @@
                 </button>
                 <a class="navbar-brand" href="/">OETF</a>
             </div>
-            <div class="collapse navbar-collapse">
-                <form class="navbar-form navbar-right" role="search">
-                    <div class="input-group">
-                        <input type="text" class="form-control" placeholder="Search">
-                        <div class="input-group-btn">
-                            <button type="submit" class="btn btn-default"><i class="glyphicon glyphicon-search"></i></button>
-                        </div>
-                    </div>
-                </form>
-            </div> <!-- nav-collapse -->
-        </div> <!-- container -->
-    </div> <!-- navbar -->
+        </div>
+    </div>
 
     <div class="container">
 
         <div class="row row-offcanvas row-offcanvas-right">
-
             <div class="col-xs-12 col-sm-9">
-                <p class="pull-right visible-xs">
-                    <button type="button" class="btn btn-primary btn-xs" data-toggle="offcanvas">Toggle nav</button>
-                </p>
-            <div class="jumbotron">
-                <h1>Say Hello to OETF!</h1>
-                <p>This is the upcoming page of OETF - the Open Engineers Task Force!</p>
+                {% block content %}    
+                <div class="jumbotron">
+                    {% block header %}
+                    <h1>Uhm, hey ... I guess</h1>
+                    <p>I don't quite know how you ended up here, but you shouldn't have... 0.0</p>
+                    {% endblock %}
+                </div>
+                {% block main_content %}
+                {% endblock %}
+                {% endblock %}
             </div>
-            <div class="row">
-                <div class="col-6 col-sm-6 col-lg-4">
-                    <h2>About OETF</h2>
-                    <p>OETF is just like IETF, but for OpenComputers.</p>
-                    <p><a class="btn btn-default" href="?r=default/about" role="button">View details &raquo;</a></p>
-                </div><!--/span-->
-            </div><!--/row-->
-        </div><!--/span-->
-
-        <div class="col-xs-6 col-sm-3 sidebar-offcanvas" id="sidebar" role="navigation">
-            <ul class="nav nav-pills nav-stacked">
-                <li class="active"><a href="/">Main Page</a></li>
-                <li><a href="?r=default/about">About</a></li>
-                <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                    List Submits <span class="caret"></span>
-                </a>
-                    <ul class="dropdown-menu" role="menu">
-                        <li role="navigation"><a role="menuitem" tabindex="-1" href="?r=list/alphabetic">Ordered by Alphabet</a></li>
-                        <li role="navigation"><a role="menuitem" tabindex="-1" href="?r=list/tag">Ordered by Tag</a></li>
-                        <li role="navigation"><a role="menuitem" tabindex="-1" href="?r=list/date">Ordered by Date</a></li>
-                    </ul>
-                </li>
-                <li><a href="?r=submit/submit">Submit New</a></li>
-                <li><a href="?r=user/login">Login</a></li>
-            </ul>
+            <div class="col-xs-6 col-sm-3 sidebar-offcanvas" id="sidebar" role="navigation">
+                <ul class="nav nav-pills nav-stacked">
+                    <li><div class="input-group">
+                        <input type="text" class="form-control" placeholder="Search">
+                        <div class="input-group-btn">
+                            <button type="submit" class="btn btn-default"><i class="glyphicon glyphicon-search"></i></button>
+                        </div>
+                    </div></li>
+                    <li {% if default %}class="active"{% endif %}><a href="/">Main Page</a></li>
+                    <li {% if about %}class="active"{% endif %}><a href="?r=default/about">About</a></li>
+                    <li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                        List Submits <span class="caret"></span>
+                    </a>
+                        <ul class="dropdown-menu" role="menu">
+                            <li {% if list_alph %}class="active"{% endif %} role="navigation"><a role="menuitem" tabindex="-1" href="?r=submits/list_alphabetic">Ordered by Alphabet</a></li>
+                            <li {% if list_tags %}class="active"{% endif %} role="navigation"><a role="menuitem" tabindex="-1" href="?r=submits/list_tag">Ordered by Tag</a></li>
+                            <li {% if list_date %}class="active"{% endif %} role="navigation"><a role="menuitem" tabindex="-1" href="?r=submits/list_date">Ordered by Date</a></li>
+                        </ul>
+                    </li>
+                    <li {% if submit %}class="active"{% endif %}><a href="?r=submit/submit_new">Submit New</a></li>
+                    <li {% if login %}class="active"{% endif %}><a href="?r=user/login">Login</a></li>
+                </ul>
+            </div>
+        
+        
         </div>
-        
-        
-      </div><!--/row-->
 
-      <hr>
+        <hr>
 
-      <footer>
-        <p>&copy; Paranoidlabs 2014</p>
-      </footer>
+        <footer>
+            <p>&copy; Paranoidlabs 2014</p>
+        </footer>
 
-    </div><!--/.container-->
+    </div>
 
-
-
-    <!-- Bootstrap core JavaScript
-    ================================================== -->
-    <!-- Placed at the end of the document so the pages load faster -->
     <script src="/views/js/jquery-2.1.1.min.js"></script>
     <script src="/views/js/bootstrap.min.js"></script>
     <script src="/views/js/offcanvas.js"></script>

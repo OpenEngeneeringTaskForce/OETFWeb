@@ -35,8 +35,11 @@ def dynamify(request_dict):
         if request_list[0] == "default":
             from controllers.default import Default
             controller = Default()
-            return Response("200 OK", controller.run(request_list[1], request_dict))
-        
+            return controller.run(request_list[1], request_dict)
+        elif request_list[0] == "user":
+            from controllers.user import User
+            controller = User()
+            return controller.run(request_list[1], request_dict)
         else:
             env = Environment()
             env.loader = FileSystemLoader(['views/'])
@@ -44,4 +47,7 @@ def dynamify(request_dict):
             return Response("404 PAGE NOT FOUND", template.render(request_dict))
     
     except Exception as e:
-        return Response("500 SERVER ERROR", "Something went wrong: " + str(e))
+        env = Environment()
+        env.loader = FileSystemLoader(['views/'])
+        template = env.get_template('error.tmpl')
+        return Response("500 SERVER ERROR", template.render({"error_num": "500", "exception_content": str(e)}))

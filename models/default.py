@@ -17,5 +17,8 @@ class Model():
         '''
         
     def default(self):
-        ''' Default action. Just returns a static Hello page. '''
-        return { 'we_are': str(os.path.abspath(os.path.curdir)) }
+        '''
+        Default page. For now just returns a static Hello page.
+        Later on we will crunch some new information together to display on the page (i.e. Last two commits) 
+        '''
+        return { 'default': True}

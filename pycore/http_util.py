@@ -29,3 +29,7 @@ class Response():
         response_function(self.status, headers)
         
         return [ str(self.body).encode('utf-8') ]
+
+class Session():
+    ''' Defines a session. Every client gets one. Used for storage of auth etc. '''
+    
