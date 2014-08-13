@@ -5,14 +5,13 @@ Created on Aug 11, 2014
 '''
 
 import mysql.connector
+import configparser
 
+from contextlib import closing
 
-config = {  # Will later be get from a file config/mysql.conf
-            'user': 'oetf',
-            'password': 'xCMEdTde6n9bqLQ',
-            'host': '127.0.0.1',
-            'database': 'oetf',
-          }
+configp = configparser.ConfigParser()
+configp.read('config/mysql.conf')
+config = dict(configp['MySQL'])
 
 class MySQLHelper():
     '''
@@ -20,17 +19,21 @@ class MySQLHelper():
     '''
     
     def __init__(self):
-        ''' Constructor. Establish connection and await querys. '''
-        self.connection = mysql.connector.connect(**config)
+        'Constructor. Establish connection and await querys.'
+        self.con = mysql.connector.connect(**config)
         
-    def query_data(self, select_string, from_string, where_string):
-        ''' Starts a query to the MySQL Server and returns the result '''
-        cursor = self.connection.cursor()
-        
-        query = ("SELECT " + select_string + " FROM " + from_string + " WHERE " + where_string)
-        
-        cursor.execute(query)
-        
+    def query_data(self, query_statement):
+        'Starts a query to the MySQL Server and returns the result'
         result = []
-        
-            
+        with closing(self.con.cursor()) as cursor:
+            cursor.execute(query_statement)
+            for row in cursor:
+                result.append(row)
+        return result
+                
+    
+    def insert_data(self, structure, data):
+        'Inserts data into the specified table'
+        with closing(self.con.cursor()) as cursor:
+            cursor.execute(structure, data)
+            self.con.commit()

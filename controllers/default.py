@@ -21,22 +21,22 @@ class Default():
         In here you should setup anything that is necessary for all of the models for the controller.
         '''
         
-    def run(self, requested_model, request_dict):
+    def run(self, request, session):
         ''' Runs the specified model '''
         env = Environment()
         env.loader = FileSystemLoader(['views/'])
-        if requested_model == "default":
+        if request.model == "default":
             from models.default import Model
-            model = Model()
-            template_var = model.default()
+            model = Model(request)
+            template_var = model.default(session)
             # Get the view necessary
             template = env.get_template('default.tmpl')
-            return Response("200 OK", str(template.render(template_var)))
+            return Response("200 OK", str(template.render(template_var)), session)
         
-        elif requested_model == "about":
+        elif request.model == "about":
             # Get the view necessary
             template = env.get_template('about.tmpl')
-            return Response("200 OK", str(template.render({"about": True})))
+            return Response("200 OK", str(template.render({"about": True})), session)
         
         template = env.get_template('404.tmpl')
-        return Response("404 PAGE NOT FOUND", template.render(request_dict))
+        return Response("404 PAGE NOT FOUND", template.render({}), session)

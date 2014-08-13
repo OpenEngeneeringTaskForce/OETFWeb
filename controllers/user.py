@@ -20,12 +20,15 @@ class User():
         ''' We have to get some things started. MySQL i.e. '''
         sql_helper = MySQLHelper()
         
-    def run(self, requested_model, request_dict):
+    def run(self, request, session):
         ''' Runs the specified model, catches the output and returns a populated view '''
         from models.user import Model
-        if requested_model == "login":
-            model = Model()
+        if request.model == "login":
+            template_var = {"login": True}
+            if request.method == "POST":
+                model = Model(request)
+                template_var.update(model.login(session))
             env = Environment()
             env.loader = FileSystemLoader('views/')
             template = env.get_template('login.tmpl')
-            return Response("200 OK", str(template.render({"login": True})))
+            return Response("200 OK", str(template.render(template_var)), session)
